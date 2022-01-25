@@ -1,0 +1,48 @@
+{
+	"name": "@romancow/v-isotope",
+	"version": "1.0.0",
+	"description": "Isotope magical layouts as a Vue component",
+	"main": "build/v-isotope.js",
+	"types": "types/v-isotope.d.ts",
+	"files": [
+		"build/",
+		"types/"
+	],
+	"scripts": {
+		"clean": "rimraf ./build/* ./types/*",
+		"prebuild": "npm run clean",
+		"build": "tsc -p . --diagnostics --explainFiles",
+		"prepare": "tsc -p ."
+	},
+	"repository": "git://github.com/romancow/v-isotope.git",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/"
+	},
+	"keywords": [
+		"vue",
+		"component",
+		"isotope",
+		"filter",
+		"sort",
+		"mogical",
+		"layout"
+	],
+	"author": "Sean Wilson",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/romancow/v-isotope/issues"
+	},
+	"homepage": "https://github.com/romancow/v-isotope#readme",
+	"dependencies": {
+		"isotope-layout": "^3.0.6"
+	},
+	"devDependencies": {
+		"@types/isotope-layout": "^3.0.9",
+		"rimraf": "^3.0.2",
+		"typescript": "^4.5.5",
+		"vue": "^2.6.14"
+	},
+	"peerDependencies": {
+		"vue": "2"
+	}
+}
