@@ -1,5 +1,5 @@
-# v-isotope
-A Vue component wrapper around [Isotope filter & sort magical layouts](https://isotope.metafizzy.co/).
+# v-masonry
+A Vue component wrapper around the [Masonry cascading grid layout library](https://masonry.desandro.com/).
 
 ## Peer Dependenices
 - [vue](https://www.npmjs.com/package/vue)
@@ -17,11 +17,11 @@ Add a scope mapping for the GitHub npm package manager by adding a `.npmrc` file
 
 Then install the package:
 ```
-npm install @romancow/v-isotope
+npm install @romancow/v-masonry
 ```
 or
 ```
-yarn add @romancow/v-isotope
+yarn add @romancow/v-masonry
 ```
 
 More info on using the GitHub npm package registry [here](https://help.github.com/en/articles/configuring-npm-for-use-with-github-package-registry#installing-a-package).
@@ -32,12 +32,12 @@ More info on using the GitHub npm package registry [here](https://help.github.co
 
 ### Options / Props
 
-All [Isotope Options](https://isotope.metafizzy.co/options.html) correspond to [Vue component props](https://vuejs.org/v2/guide/components-props.html).
+All [Masonry Options](https://masonry.desandro.com/options.html) correspond to [Vue component props](https://vuejs.org/v2/guide/components-props.html).
 
 ### API / Methods
 
-The [Flickity API methods](https://isotope.metafizzy.co/methods.html) correspond to [Vue component methods](https://vuejs.org/v2/api/#methods).
+The [Masonry API methods](https://masonry.desandro.com/methods.html) correspond to [Vue component methods](https://vuejs.org/v2/api/#methods).
 
 ### Events
 
-[Flickity events](https://isotope.metafizzy.co/events.html) are mapped as [Vue component events](https://vuejs.org/v2/guide/events.html).
+[Masonry events](https://masonry.desandro.com/events.html) are mapped as [Vue component events](https://vuejs.org/v2/guide/events.html).

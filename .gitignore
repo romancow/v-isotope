@@ -106,6 +106,9 @@ dist
 # nvm
 .nvmrc
 
+# temp files
+tmp/
+
 # Visual Studio Code settings
 .vscode/
 

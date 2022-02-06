@@ -1,9 +1,9 @@
 {
-	"name": "@romancow/v-isotope",
+	"name": "@romancow/v-masonry",
 	"version": "1.0.0",
-	"description": "Isotope magical layouts as a Vue component",
-	"main": "build/v-isotope.js",
-	"types": "types/v-isotope.d.ts",
+	"description": "Masonry cascading grid layout library as a Vue component",
+	"main": "build/v-masonry.js",
+	"types": "types/v-masonry.d.ts",
 	"files": [
 		"build/",
 		"types/"
@@ -14,30 +14,29 @@
 		"build": "tsc -p . --diagnostics --explainFiles",
 		"prepare": "tsc -p ."
 	},
-	"repository": "git://github.com/romancow/v-isotope.git",
+	"repository": "git://github.com/romancow/v-masonry.git",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/"
 	},
 	"keywords": [
 		"vue",
 		"component",
-		"isotope",
-		"filter",
-		"sort",
-		"mogical",
+		"masonry",
+		"cascade",
+		"grid",
 		"layout"
 	],
 	"author": "Sean Wilson",
-	"license": "GPL-3.0",
+	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/romancow/v-isotope/issues"
+		"url": "https://github.com/romancow/v-masonry/issues"
 	},
-	"homepage": "https://github.com/romancow/v-isotope#readme",
+	"homepage": "https://github.com/romancow/v-masonry#readme",
 	"dependencies": {
-		"isotope-layout": "^3.0.6"
+		"masonry-layout": "^4.2.2"
 	},
 	"devDependencies": {
-		"@types/isotope-layout": "^3.0.9",
+		"@types/masonry-layout": "^4.2.4",
 		"rimraf": "^3.0.2",
 		"typescript": "^4.5.5",
 		"vue": "^2.6.14"
