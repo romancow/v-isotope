@@ -17,7 +17,8 @@ export namespace Options {
 		stamped: "stamp"
 	}
 	const Defaults: { [key: string]: any } = {
-		itemSelector: ".v-masonry-item"
+		itemSelector: ".v-masonry-item",
+		stamped: ".v-masonry-stamp"
 	}
 
 	export const Props = mapValues({
