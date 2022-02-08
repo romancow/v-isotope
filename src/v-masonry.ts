@@ -1,7 +1,9 @@
 import type { VueConstructor, CreateElement, VNode } from 'vue'
 import Vue from 'vue'
 import Masonry from 'masonry-layout'
-import { Options, Event } from './settings'
+import Options from './options'
+import Event from './event'
+import { addClass } from './utilities'
 
 type VMasonry = Vue & {
 	instance: null | Masonry
@@ -18,17 +20,6 @@ type VMasonry = Vue & {
 	renderAppend(h: CreateElement): VNode[]
 }
 
-function addClass(node: VNode, cls: string) {
-	let classes = (node.data ??= {}).class ?? []
-	if (typeof classes === "string")
-		classes = [classes, cls]
-	else if (Array.isArray(classes))
-		classes.push(cls)
-	else classes[cls] = true
-	node.data.class = classes
-	return node
-}
-
 export default (Vue as VueConstructor<VMasonry>).extend({
 
 	data() {
@@ -36,7 +27,7 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 	},
 
 	props: {
-		...Options.Props,
+		...Options.toProps(),
 		items: { type: Array, default: () => [] }
 	},
 
@@ -47,18 +38,6 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 		},
 
 		options() {
-			// const options: Masonry.Options = {}
-			// Options.keys().forEach(prop => {
-			// 	const value = this[prop]
-			// 	if (value != null)
-			// 		options[prop] = value
-			// })
-			// masonry.negateOptions.forEach((prop, negated) => {
-			// 	const value = this[negated]
-			// 	if (value != null)
-			// 		options[prop] = !value
-			// })
-			// return options
 			return Options.select(this)
 		}
 
@@ -87,8 +66,8 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 	},
 
 	methods: {
-		layoutComplete: Event.method('layout-complete'),
-		removeComplete: Event.method('remove-complete'),
+		layoutComplete: Event.emitter('layout-complete'),
+		removeComplete: Event.emitter('remove-complete'),
 
 		renderEmpty(this: VMasonry, h: CreateElement): VNode[] | null {
 			const { $scopedSlots: { empty }, hasItems } = this
