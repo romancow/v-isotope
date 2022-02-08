@@ -34,10 +34,6 @@ More info on using the GitHub npm package registry [here](https://help.github.co
 
 All [Masonry Options](https://masonry.desandro.com/options.html) correspond to [Vue component props](https://vuejs.org/v2/guide/components-props.html).
 
-### API / Methods
-
-The [Masonry API methods](https://masonry.desandro.com/methods.html) correspond to [Vue component methods](https://vuejs.org/v2/api/#methods).
-
 ### Events
 
 [Masonry events](https://masonry.desandro.com/events.html) are mapped as [Vue component events](https://vuejs.org/v2/guide/events.html).

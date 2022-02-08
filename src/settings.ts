@@ -10,15 +10,11 @@ function mapValues<T, R>(obj: T, mapFn: <K extends keyof T>(val: T[K], key: K, o
 }
 
 export namespace Options {
-	type OptKey = keyof Masonry.Options
 	type PropKey = keyof typeof Props
-	
-	const PropNameMap: { [key in PropKey]?: OptKey } = {
-		stamped: "stamp"
-	}
+
 	const Defaults: { [key: string]: any } = {
 		itemSelector: ".v-masonry-item",
-		stamped: ".v-masonry-stamp"
+		stamp: ".v-masonry-stamp"
 	}
 
 	export const Props = mapValues({
@@ -31,7 +27,7 @@ export namespace Options {
 		gutter: [Number, String],
 		horizontalOrder: Boolean,
 		percentPosition: Boolean,
-		stamped: String,
+		stamp: String,
 		fitWidth: Boolean,
 		originLeft: Boolean,
 		originTop: Boolean,
@@ -48,9 +44,8 @@ export namespace Options {
 
 	export function select(src: { [key: string]: any }) {
 		const keys = Object.keys(Props) as PropKey[]
-		return keys.reduce(<K extends PropKey>(options: Masonry.Options, prop: K) => {
-			const value = src[prop]
-			const key = (PropNameMap[prop] ?? prop) as OptKey
+		return keys.reduce(<K extends PropKey>(options: Masonry.Options, key: K) => {
+			const value = src[key]
 			if (value != null)
 				options[key] = value
 			return options

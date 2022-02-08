@@ -1,7 +1,7 @@
 import type { VueConstructor, CreateElement, VNode } from 'vue'
 import Vue from 'vue'
 import Masonry from 'masonry-layout'
-import { Options, Methods, Event } from './settings'
+import { Options, Event } from './settings'
 
 type VMasonry = Vue & {
 	instance: null | Masonry
@@ -85,7 +85,6 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 	},
 
 	methods: {
-		...Methods.map(),
 		layoutComplete: Event.method('layout-complete'),
 		removeComplete: Event.method('remove-complete'),
 
