@@ -14,6 +14,8 @@ type VMasonry = Vue & {
 	renderEmpty(h: CreateElement): VNode[] | null
 	renderItems(h: CreateElement): VNode[]
 	renderStamp(h: CreateElement): VNode[]
+	renderPrepend(h: CreateElement): VNode[]
+	renderAppend(h: CreateElement): VNode[]
 }
 
 function addClass(node: VNode, cls: string) {
@@ -107,14 +109,26 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 		renderStamp(this: VMasonry, h: CreateElement): VNode[] {
 			const { $scopedSlots: { stamp }, items } = this
 			return stamp?.({ items })?.map(s => addClass(s, 'v-masonry-stamp')) ?? []
+		},
+
+		renderPrepend(this: VMasonry, h: CreateElement): VNode[] {
+			const { $scopedSlots: { prepend }, items } = this
+			return prepend?.({ items }) ?? []
+		},
+
+		renderAppend(this: VMasonry, h: CreateElement) {
+			const { $scopedSlots: { append }, items } = this
+			return append?.({ items }) ?? []
 		}
 	},
 
 	render(this: VMasonry, h: CreateElement) {
 		const { $scopedSlots: { default: body }, items } = this
 		const children = body?.({ items }) ?? [
+			...this.renderPrepend(h),
 			...(this.renderEmpty(h) ?? this.renderStamp(h)),
-			...this.renderItems(h)
+			...this.renderItems(h),
+			...this.renderAppend(h)
 		]
 		return h('div', { class: 'v-masonry' }, children)
 	},
