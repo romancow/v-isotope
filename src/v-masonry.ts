@@ -7,6 +7,7 @@ import { addClass , forEach } from './utilities'
 type VMasonry = Vue & {
 	instance: null | Masonry
 	readonly items: any[]
+	readonly initLayout: boolean
 	readonly options: Masonry.Options
 	readonly hasItems: boolean
 
@@ -49,6 +50,8 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 					layoutComplete: "layout-complete",
 					removeComplete: "removae-complete"
 				}, (emit, on) => val?.on(on, (...args) => this.$emit(emit, ...args)))
+				if (this.initLayout === false)
+					val?.layout()
 			},
 			immediate: true
 		},
