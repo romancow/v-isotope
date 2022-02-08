@@ -22,6 +22,10 @@ export function invert<T extends { [key: string]: string }>(obj: T) {
 	return collect(keys(obj), key => obj[key])
 }
 
+export function forEach<T>(obj: T, fn: <K extends keyof T>(val: T[K], key: K, obj: T) => void) {
+	keys(obj).forEach(key => fn(obj[key], key, obj))
+}
+
 export function addClass(node: VNode, cls: string) {
 	let classes = (node.data ??= {}).class ?? []
 	if (typeof classes === "string")

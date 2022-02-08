@@ -2,16 +2,13 @@ import type { VueConstructor, CreateElement, VNode } from 'vue'
 import Vue from 'vue'
 import Masonry from 'masonry-layout'
 import Options from './options'
-import Event from './event'
-import { addClass } from './utilities'
+import { addClass , forEach } from './utilities'
 
 type VMasonry = Vue & {
 	instance: null | Masonry
 	readonly items: any[]
 	readonly options: Masonry.Options
 	readonly hasItems: boolean
-	layoutComplete(): void
-	removeComplete(): void
 
 	renderEmpty(h: CreateElement): VNode[] | null
 	renderItems(h: CreateElement): VNode[]
@@ -46,11 +43,12 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 	watch: {
 
 		instance: {
-			handler(this: VMasonry, instance: Masonry | null, old: Masonry | null) {
-				if (old != null)
-					Event.All.forEach(event => old.off(event, this[event]))
-				if (instance != null)
-					Event.All.forEach(event => instance.on(event, this[event]))
+			handler(this: VMasonry, val: Masonry | null, old: Masonry | null) {
+				old?.allOff().destroy()
+				forEach({
+					layoutComplete: "layout-complete",
+					removeComplete: "removae-complete"
+				}, (emit, on) => val?.on(on, (...args) => this.$emit(emit, ...args)))
 			},
 			immediate: true
 		},
@@ -66,8 +64,6 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 	},
 
 	methods: {
-		layoutComplete: Event.emitter('layout-complete'),
-		removeComplete: Event.emitter('remove-complete'),
 
 		renderEmpty(this: VMasonry, h: CreateElement): VNode[] | null {
 			const { $scopedSlots: { empty }, hasItems } = this
@@ -124,8 +120,6 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 	},
 
 	destroyed(this: VMasonry) {
-		const { instance } = this
-		instance?.destroy()
 		this.instance = null
 	}
 
