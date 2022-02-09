@@ -24,7 +24,7 @@ declare module 'masonry-layout' {
 		off(event: Masonry.Event, listener: Masonry.Listener): this
 		once(event: Masonry.Event, listener: Masonry.Listener): this
 		emitEvent(event: Masonry.Event, args: [Masonry.Item[]]): this
-		allOff(): this
+		allOff(): void
 
 		// Utilities
 		reloadItems(): void

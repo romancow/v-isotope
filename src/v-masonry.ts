@@ -45,7 +45,8 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 
 		instance: {
 			handler(this: VMasonry, val: Masonry | null, old: Masonry | null) {
-				old?.allOff().destroy()
+				old?.allOff()
+				old?.destroy()
 				forEach({
 					layoutComplete: "layout-complete",
 					removeComplete: "removae-complete"
