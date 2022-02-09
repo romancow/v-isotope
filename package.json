@@ -1,6 +1,6 @@
 {
 	"name": "@romancow/v-masonry",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Masonry cascading grid layout library as a Vue component",
 	"main": "build/v-masonry.js",
 	"types": "types/v-masonry.d.ts",
