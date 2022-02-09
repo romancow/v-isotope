@@ -49,7 +49,7 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 				old?.destroy()
 				forEach({
 					layoutComplete: "layout-complete",
-					removeComplete: "removae-complete"
+					removeComplete: "remove-complete"
 				}, (emit, on) => val?.on(on, (...args) => this.$emit(emit, ...args)))
 				if (this.initLayout === false)
 					val?.layout()
