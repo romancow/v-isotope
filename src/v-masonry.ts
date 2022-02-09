@@ -6,11 +6,13 @@ import { addClass , forEach } from './utilities'
 
 type VMasonry = Vue & {
 	instance: null | Masonry
+	readonly disabled: boolean
 	readonly items: any[]
 	readonly initLayout: boolean
 	readonly options: Masonry.Options
 	readonly hasItems: boolean
 
+	updateInstance(disabled?: boolean): void
 	renderEmpty(h: CreateElement): VNode[] | null
 	renderItems(h: CreateElement): VNode[]
 	renderStamp(h: CreateElement): VNode[]
@@ -26,6 +28,7 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 
 	props: {
 		...Options.toProps(),
+		disabled: { type: Boolean, default: false },
 		items: { type: Array, default: () => [] }
 	},
 
@@ -57,6 +60,8 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 			immediate: true
 		},
 
+		disabled: "updateInstance",
+
 		options(options: Masonry.Options) {
 			const { instance } = this
 			if (instance) {
@@ -68,6 +73,10 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 	},
 
 	methods: {
+		updateInstance(this: VMasonry, disabled: boolean = this.disabled) {
+			const { $el, options } = this
+			this.instance = disabled ? null : new Masonry($el as HTMLElement, options)
+		},
 
 		renderEmpty(this: VMasonry, h: CreateElement): VNode[] | null {
 			const { $scopedSlots: { empty }, hasItems } = this
@@ -113,10 +122,7 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 	},
 
 	mounted(this: VMasonry) {
-		this.$nextTick(() => {
-			const { $el, options } = this
-			this.instance = new Masonry($el as HTMLElement, options)
-		})
+		this.$nextTick(this.updateInstance)
 	},
 
 	updated() {
