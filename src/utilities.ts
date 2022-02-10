@@ -9,7 +9,7 @@ export function mapKeys<T>(obj: T, mapFn: (key: keyof T) => string) {
 	}, {} as Record<string, any>)
 }
 
-export function mapValues<T, R>(obj: T, mapFn: <K extends keyof T>(val: T[K], key: K, obj: T) => R) {
+export function mapValues<T, R>(obj: T, mapFn: <K extends keyof T>(val: T[K], key: K, obj: T) => (R | undefined)) {
 	return keys(obj).reduce((mapped, key) => {
 		const value = mapFn(obj[key], key, obj)
 		if ((value != null) || (value === null))
@@ -31,6 +31,22 @@ export function invert<T extends { [key: string]: string }>(obj: T) {
 
 export function forEach<T>(obj: T, fn: <K extends keyof T>(val: T[K], key: K, obj: T) => void) {
 	keys(obj).forEach(key => fn(obj[key], key, obj))
+}
+
+export function select<T>(obj: T, keys: (keyof T)[]) {
+	return keys.reduce((selected, key) => { 
+		selected[key] = obj[key]
+		return selected
+	}, {} as Partial<T>)
+}
+
+export function filter<T>(obj: T, filterFn?: <K extends keyof T>(val: T[K], key: K, obj: T) => boolean) {
+	return keys(obj).reduce((filtered, key) => {
+		const val = obj[key]
+		if (filterFn?.(val, key, obj) ?? (val != null))
+			filtered[key] = val
+		return filtered
+	}, {} as Partial<T>)
 }
 
 export function camelcase(str: string) {
