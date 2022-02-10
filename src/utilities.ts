@@ -18,17 +18,6 @@ export function mapValues<T, R>(obj: T, mapFn: <K extends keyof T>(val: T[K], ke
 	}, {} as { [k in keyof T]: R })
 }
 
-export function collect<T, A extends readonly T[], K extends string>(arr: readonly T[] & A, fn: (item: T, index: number, arr: A) => K) {
-	return arr.reduce(
-		(rec, item, index) => (rec[fn(item, index, arr)] = item, rec),
-		{} as Record<K, T>
-	)
-}
-
-export function invert<T extends { [key: string]: string }>(obj: T) {
-	return collect(keys(obj), key => obj[key])
-}
-
 export function forEach<T>(obj: T, fn: <K extends keyof T>(val: T[K], key: K, obj: T) => void) {
 	keys(obj).forEach(key => fn(obj[key], key, obj))
 }
