@@ -64,7 +64,7 @@ new Vue({
 
 <!-- The [Masonry options](https://masonry.desandro.com/options.html) can be set as either the directive value or as modifiers (if it's a boolean option). -->
 
-You can pass an [Masonry options](https://masonry.desandro.com/options.html) object as the directive's value:
+You can pass a [Masonry options](https://masonry.desandro.com/options.html) object as the directive's value:
 
 ```html
 <div v-masonry="{ itemSelector: '.v-masonry-item', columnWidth: 80, stamp: '.v-masonry-stamp' }">
@@ -116,7 +116,7 @@ In addition to setting options using the directive's value, you can also set boo
 </div>
 ```
 
-In addition existing boolean Masonry options, there are a few extras provided as modifiers for options that are already `true` by default:
+In addition to existing boolean Masonry options, there are a few extras provided as modifiers for options that are already `true` by default:
 
 - `origin-right`: sets `originLeft` to `false`
 - `origin-bottom`: sets `originTop` to `false`
