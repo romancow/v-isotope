@@ -30,7 +30,7 @@ declare module 'masonry-layout' {
 		reloadItems(): void
 		destroy(): void
 		getItemElements(): Masonry.Item[]
-		static data(element: Element | string): Masonry
+		static data(element: Element | string): Masonry | undefined
 	}
 
 	namespace Masonry {
