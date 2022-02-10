@@ -17,7 +17,7 @@ namespace Options {
 	}
 	type Modifiers = Record<string, boolean>
 
-	export function get({ value, modifiers }: DirectiveBinding): Masonry.Options {
+	export function get({ value = {}, modifiers }: DirectiveBinding): Masonry.Options {
 		const modOpts: Modifiers = {}
 		forEach(mapKeys<Modifiers>(modifiers, camelcase), (val: boolean, key) => {
 			const nKey: string = (<any>Negated)[key]
