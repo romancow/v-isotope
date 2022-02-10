@@ -6,7 +6,9 @@
 	"types": "types/index.d.ts",
 	"files": [
 		"build/",
-		"types/"
+		"types/",
+		"component/",
+		"directive/"
 	],
 	"scripts": {
 		"clean": "rimraf ./build/* ./types/*",

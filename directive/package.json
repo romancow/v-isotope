@@ -1,0 +1,5 @@
+{
+	"main": "../build/directive.js",
+	"types": "../types/directive.d.ts",
+	"private": true
+}
