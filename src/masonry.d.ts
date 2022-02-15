@@ -65,6 +65,7 @@ declare module 'masonry-layout' {
 			transitionDuration?: string | 0
 			stagger?: string | number
 			resize?: boolean
+			resizeContainer?: boolean
 			initLayout?: boolean
 		}
 

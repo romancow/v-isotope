@@ -50,6 +50,7 @@ namespace VMasonry {
 		transitionDuration: String,
 		stagger: [Number, String],
 		resize: Boolean,
+		resizeContainer: Boolean,
 		initLayout: Boolean
 	}
 }
