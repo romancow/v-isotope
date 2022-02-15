@@ -1,4 +1,5 @@
 import type { DirectiveOptions, DirectiveBinding } from 'vue/types/options'
+import Vue from 'vue'
 import Masonry from 'masonry-layout'
 import { mapKeys, forEach, camelcase } from './utilities.js'
 
@@ -62,14 +63,16 @@ namespace Instance {
 const directive: DirectiveOptions = {
 	inserted(el, binding) {
 		if (binding.value !== false)
-			Instance.create(el, binding)
+			Vue.nextTick(() => Instance.create(el, binding))
 	},
 
 	componentUpdated(el, binding) {
 		if (binding.value === false)
 			Instance.destroy(el, binding)
-		else if (!Instance.refresh(el, binding))
-			Instance.create(el, binding)
+		else Vue.nextTick(() => {
+			if (!Instance.refresh(el, binding))
+				Instance.create(el, binding)
+		})
 	},
 
 	unbind: Instance.destroy
