@@ -15,8 +15,14 @@ declare module 'masonry-layout' {
 		// Layout
 		layout(): void
 		layoutItems(items: Masonry.Item[], isStill?: boolean): void
+		ignore(element: Element): void
+		unignore(element: Element): void
 		stamp(elements: Elements): void
 		unstamp(elements: Elements): void
+		reveal(items: Masonry.Item[]): void
+		hide(items: Masonry.Item[]): void
+		revealItemElements(elements: Elements): void
+		hideItemElements(elements: Elements): void
 	
 		// Adding & removing items
 		appended(elements: Elements): void
@@ -35,6 +41,10 @@ declare module 'masonry-layout' {
 		reloadItems(): void
 		destroy(): void
 		getItemElements(): Masonry.Item[]
+		option(options: Masonry.Options): void
+		resizeContainer(): void
+		getItem(element: Element): Masonry.Item | undefined
+		getItems(elements: Elements): Masonry.Item[]
 		static data(element: Element | string): Masonry | undefined
 	}
 
@@ -69,7 +79,7 @@ declare module 'masonry-layout' {
 			initLayout?: boolean
 		}
 
-		type Event = 'layoutComplete' | 'removeComplete'
+		type Event = 'layoutComplete' | 'removeComplete' | 'revealComplete' | 'hideComplete'
 		type Listener = (items: Item[]) => void
 
 		interface Size {
