@@ -5,7 +5,12 @@ declare module 'masonry-layout' {
 		constructor(options?: Masonry.Options)
 		constructor(selector: string | Element, options?: Masonry.Options)
 
+		element: Element
 		options: Masonry.Options
+		colYs: number[]
+		cols: number
+		maxY: number
+		size: Masonry.Size
 	
 		// Layout
 		layout(): void
@@ -66,33 +71,35 @@ declare module 'masonry-layout' {
 		type Event = 'layoutComplete' | 'removeComplete'
 		type Listener = (items: Item[]) => void
 
+		interface Size {
+			borderBottomWidth: number,
+			borderLeftWidth: number,
+			borderRightWidth: number,
+			borderTopWidth: number,
+			height: number,
+			innerHeight: number,
+			innerWidth: number,
+			isBorderBox: boolean,
+			marginBottom: number,
+			marginLeft: number,
+			marginRight: number,
+			marginTop: number,
+			outerHeight: number,
+			outerWidth: number,
+			paddingBottom: number,
+			paddingLeft: number,
+			paddingRight: number,
+			paddingTop: number,
+			width: number
+		}
+
 		interface Item {
 			element: Element,
 			isHidden?: boolean,
 			isTransitioning?: boolean,
 			layout: Masonry,
 			position: { x: number, y: number },
-			size: {
-				borderBottomWidth: number,
-				borderLeftWidth: number,
-				borderRightWidth: number,
-				borderTopWidth: number,
-				height: number,
-				innerHeight: number,
-				innerWidth: number,
-				isBorderBox: boolean,
-				marginBottom: number,
-				marginLeft: number,
-				marginRight: number,
-				marginTop: number,
-				outerHeight: number,
-				outerWidth: number,
-				paddingBottom: number,
-				paddingLeft: number,
-				paddingRight: number,
-				paddingTop: number,
-				width: number
-			},
+			size: Size,
 			staggerDelay: string
 		}
 	}
