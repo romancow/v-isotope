@@ -12,13 +12,15 @@ type VMasonry = Vue & {
 	readonly modifiers: { [mod: string]: boolean }
 	readonly hasItems: boolean
 
-	getInstance(): Masonry | null
+	getInstance(): Masonry | undefined
 	renderEmpty(h: CreateElement): VNode[] | null
 	renderItems(h: CreateElement): VNode[]
 	renderStamp(h: CreateElement): VNode[]
 	renderPrepend(h: CreateElement): VNode[]
 	renderAppend(h: CreateElement): VNode[]
 }
+
+type VMasonryInternal = VMasonry & { instance?: Masonry }
 
 namespace VMasonry {
 	export const Defaults: { [key: string]: any } = {
@@ -83,18 +85,18 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 
 	methods: {
 		getInstance() {
-			return Masonry.data(this.$el) ?? null
+			return Masonry.data(this.$el)
 		},
 
-		renderEmpty(this: VMasonry, h: CreateElement): VNode[] | null {
-			const { $scopedSlots: { empty }, hasItems } = this
-			return hasItems ? null : (empty?.({}) ?? null)
+		renderEmpty(this: VMasonryInternal, h: CreateElement): VNode[] | null {
+			const { $scopedSlots: { empty }, hasItems, instance } = this
+			return hasItems ? null : (empty?.({ instance }) ?? null)
 		},
 
-		renderItems(this: VMasonry, h: CreateElement): VNode[] {
-			const { $scopedSlots: { item }, items } = this
+		renderItems(this: VMasonryInternal, h: CreateElement): VNode[] {
+			const { $scopedSlots: { item }, items, instance } = this
 			return !item ? [] :
-				items.map((itm, index) => item({ item: itm, items, index }))
+				items.map((itm, index) => item({ item: itm, items, index, instance }))
 					 .map(rndr =>
 						(rndr?.length === 1) ?
 							addClass(rndr[0], 'v-masonry-item') :
@@ -102,24 +104,25 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 					 )
 		},
 
-		renderStamp(this: VMasonry, h: CreateElement): VNode[] {
-			const { $scopedSlots: { stamp }, items } = this
-			return stamp?.({ items })?.map(s => addClass(s, 'v-masonry-stamp')) ?? []
+		renderStamp(this: VMasonryInternal, h: CreateElement): VNode[] {
+			const { $scopedSlots: { stamp }, items, instance } = this
+			return stamp?.({ items, instance })?.map(s => addClass(s, 'v-masonry-stamp')) ?? []
 		},
 
-		renderPrepend(this: VMasonry, h: CreateElement): VNode[] {
-			const { $scopedSlots: { prepend }, items } = this
-			return prepend?.({ items }) ?? []
+		renderPrepend(this: VMasonryInternal, h: CreateElement): VNode[] {
+			const { $scopedSlots: { prepend }, items, instance } = this
+			return prepend?.({ items, instance }) ?? []
 		},
 
-		renderAppend(this: VMasonry, h: CreateElement) {
-			const { $scopedSlots: { append }, items } = this
-			return append?.({ items }) ?? []
+		renderAppend(this: VMasonryInternal, h: CreateElement) {
+			const { $scopedSlots: { append }, items, instance } = this
+			return append?.({ items, instance }) ?? []
 		}
 	},
 
-	render(this: VMasonry, h: CreateElement) {
+	render(this: VMasonryInternal, h: CreateElement) {
 		const { $scopedSlots: { default: body }, items, options: value, modifiers } = this
+		this.instance = this.getInstance()
 		const directive = { name: "masonry", value, modifiers }
 		const children = body?.({ items }) ?? [
 			...this.renderPrepend(h),
