@@ -2,6 +2,8 @@ declare module 'masonry-layout' {
 	type Elements = Element | NodeList | Element[]
 
 	class Masonry {
+		static defaults: Masonry.Options
+
 		constructor(options?: Masonry.Options)
 		constructor(selector: string | Element, options?: Masonry.Options)
 

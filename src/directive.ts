@@ -53,7 +53,11 @@ namespace Instance {
 	export function refresh(el: HTMLElement, binding: DirectiveBinding) {
 		const masonry = Masonry.data(el)
 		if (masonry) {
-			masonry.options = Options.get(binding)
+			masonry.options = {
+				...Masonry.defaults,
+				...Options.get(binding)
+			}
+			masonry.reloadItems()
 			masonry.layout()
 		}
 		return (masonry != null)
