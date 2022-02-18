@@ -8,7 +8,8 @@
 		"build/",
 		"types/",
 		"component/",
-		"directive/"
+		"directive/",
+		"masonry-layout/"
 	],
 	"scripts": {
 		"clean": "rimraf ./build/* ./types/*",
@@ -38,6 +39,7 @@
 	},
 	"homepage": "https://github.com/romancow/v-masonry#readme",
 	"dependencies": {
+		"@types/masonry-layout": "file:masonry-layout",
 		"masonry-layout": "^4.2.2"
 	},
 	"devDependencies": {
