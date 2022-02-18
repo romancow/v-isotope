@@ -1,0 +1,8 @@
+{
+	"name": "@types/masonry-layout",
+	"description": "TypeScript definitions for Masonry",
+	"version": "1.0.0",
+	"main": "",
+	"types": "index.d.ts",
+	"private": true
+}

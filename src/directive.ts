@@ -1,43 +1,13 @@
 import type { DirectiveOptions, DirectiveBinding } from 'vue/types/options'
 import Vue from 'vue'
 import Masonry from 'masonry-layout'
-import { mapKeys, forEach, camelcase } from './utilities.js'
-
-type Options = Masonry.Options & { on?: Options.On }
-
-namespace Options {
-	export const Negated = {
-		originRight: "originLeft",
-		originBottom: "originTop",
-		noResize: "resize"
-	}
-
-	export type On = Record<Masonry.Event, Masonry.Listener> & {
-		created?: (instance: Masonry) => void,
-		destroyed?: (instance: Masonry) => void
-	}
-	type Modifiers = Record<string, boolean>
-
-	export function get({ value = {}, modifiers }: DirectiveBinding): Masonry.Options {
-		const modOpts: Modifiers = {}
-		forEach(mapKeys<Modifiers>(modifiers, camelcase), (val: boolean, key) => {
-			const nKey: string = (<any>Negated)[key]
-			modOpts[nKey ?? key] = (!nKey == val)
-		})
-		const { on = null, ...valOpts } =
-			(typeof value === "string") ? { itemSelector: value } :
-			(typeof value === "number") ? { columnWidth: value } :
-			(value === true) ? {} : value
-		return { ...modOpts, ...valOpts }
-	}
-}
-
-export { Options }
+import Opts from './options.js'
+import { forEach } from './utilities.js'
 
 namespace Instance {
 	export function create(el: HTMLElement, binding: DirectiveBinding) {
-		const masonry = new Masonry(el, Options.get(binding))
-		const { created, destroyed, ...on }: Options.On = binding.value?.on ?? {}
+		const masonry = new Masonry(el, Opts.get(binding))
+		const { created, destroyed, ...on }: Opts.On = binding.value?.on ?? {}
 		if (on)
 			forEach(on, (listener, event) => masonry.on(event, listener))
 		created?.(masonry)
@@ -55,7 +25,7 @@ namespace Instance {
 		if (masonry) {
 			masonry.options = {
 				...Masonry.defaults,
-				...Options.get(binding)
+				...Opts.get(binding)
 			}
 			masonry.reloadItems()
 			masonry.layout()
@@ -82,4 +52,9 @@ const directive: DirectiveOptions = {
 	unbind: Instance.destroy
 }
 
+namespace directive {
+	export type Options = Opts
+}
+
 export default directive
+export type { default as Masonry } from 'masonry-layout'
