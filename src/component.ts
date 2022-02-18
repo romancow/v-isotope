@@ -135,3 +135,5 @@ export default (Vue as VueConstructor<VMasonry>).extend({
 		return h('div', { class: 'v-masonry', directives: [directive] }, children)
 	}
 })
+
+export type { default as Masonry } from 'masonry-layout'

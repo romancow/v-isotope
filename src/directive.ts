@@ -57,3 +57,4 @@ namespace directive {
 }
 
 export default directive
+export type { default as Masonry } from 'masonry-layout'
