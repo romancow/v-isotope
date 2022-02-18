@@ -2,7 +2,8 @@ import type { VueConstructor, CreateElement, VNode } from 'vue'
 import type { PropType } from 'vue/types/options'
 import Vue from 'vue'
 import Masonry from 'masonry-layout'
-import masonry, { Options } from './directive.js'
+import masonry from './directive.js'
+import Options from './options.js'
 import { keys, mapKeys, mapValues, select, filter, camelcase, addClass } from './utilities.js'
 
 type VMasonry = Vue & {
