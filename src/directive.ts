@@ -9,7 +9,7 @@ namespace Instance {
 		const masonry = new Masonry(el, Opts.get(binding))
 		const { created, destroyed, ...on }: Opts.On = binding.value?.on ?? {}
 		if (on)
-			forEach(on, (listener, event) => masonry.on(event, listener))
+			forEach(on, (listener, event) => listener && masonry.on(event, listener))
 		created?.(masonry)
 	}
 	

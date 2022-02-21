@@ -11,7 +11,7 @@ namespace Options {
 		noResize: "resize"
 	}
 
-	export type On = Record<Masonry.Event, Masonry.Listener> & {
+	export type On = { [ev in Masonry.Event]?:  Masonry.Listener } & {
 		created?: (instance: Masonry) => void,
 		destroyed?: (instance: Masonry) => void
 	}
