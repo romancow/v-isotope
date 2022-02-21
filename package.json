@@ -47,5 +47,8 @@
 	},
 	"peerDependencies": {
 		"vue": "2"
-	}
+	},
+	"bundledDependencies": [
+		"@types/masonry-layout"
+	]
 }
