@@ -15,7 +15,8 @@
 		"clean": "rimraf ./build/* ./types/*",
 		"prebuild": "npm run clean",
 		"build": "tsc -p . --diagnostics --explainFiles",
-		"prepare": "tsc -p ."
+		"prepare": "tsc -p .",
+		"postinstall": "npm install ./masonry-layout"
 	},
 	"repository": "git://github.com/romancow/v-masonry.git",
 	"publishConfig": {
@@ -37,10 +38,10 @@
 	},
 	"homepage": "https://github.com/romancow/v-masonry#readme",
 	"dependencies": {
-		"@types/masonry-layout": "file:./masonry-layout",
 		"masonry-layout": "^4.2.2"
 	},
 	"devDependencies": {
+		"@types/masonry-layout": "file:masonry-layout",
 		"rimraf": "^3.0.2",
 		"typescript": "^4.5.5",
 		"vue": "^2.6.14"
