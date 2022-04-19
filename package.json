@@ -16,7 +16,8 @@
 		"prebuild": "npm run clean",
 		"build": "tsc -p . --diagnostics --explainFiles",
 		"prepare": "tsc -p .",
-		"postinstall": "npm install ./masonry-layout"
+		"postinstall": "npm install ./masonry-layout",
+		"postupdate": "npm install ./masonry-layout"
 	},
 	"repository": "git://github.com/romancow/v-masonry.git",
 	"publishConfig": {
