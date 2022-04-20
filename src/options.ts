@@ -1,3 +1,4 @@
+/// <reference path="../masonry-layout/index.d.ts" />
 import type Masonry from 'masonry-layout'
 import type { DirectiveBinding } from 'vue/types/options'
 import { mapKeys, forEach, camelcase } from './utilities.js'

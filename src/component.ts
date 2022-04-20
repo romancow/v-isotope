@@ -1,3 +1,4 @@
+/// <reference path="../masonry-layout/index.d.ts" />
 import type { VueConstructor, CreateElement, VNode } from 'vue'
 import type { PropType } from 'vue/types/options'
 import Vue from 'vue'

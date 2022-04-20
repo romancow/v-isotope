@@ -1,3 +1,4 @@
+/// <reference path="../masonry-layout/index.d.ts" />
 import type { DirectiveOptions, DirectiveBinding } from 'vue/types/options'
 import Vue from 'vue'
 import Masonry from 'masonry-layout'
